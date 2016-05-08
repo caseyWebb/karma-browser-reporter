@@ -1,0 +1,83 @@
+html {
+  font-family: sans-serif;
+}
+
+.counts {
+  float: right;
+  font-size: 12px;
+}
+
+.count-label {
+  color: #666;
+  padding-right: 5px;
+}
+
+.working-label {
+  color: #666;
+  padding-right: 25px;
+}
+
+.count {
+  text-transform: italic;
+  margin-right: 15px;
+}
+
+.browser-header {
+  margin-left: 15px;
+  color: #666;
+  font-weight: 200;
+}
+
+.describe-block {
+  margin-left: 5px;
+  padding-left: 10px;
+  border-left: 1px solid #eee;
+}
+
+.describe-block.last {
+  border-left: none;
+}
+
+.describe-header {
+  margin-bottom: 5px;
+  color: #333;
+}
+
+.spec {
+  font-size: 12px;
+}
+
+.spec::before {
+  display: inline-block;
+  min-width: 15px;
+}
+
+.spec.pass::before {
+  color: #27ae60;
+  content: '\2713';
+}
+
+.spec.fail::before {
+  content: '\2717';
+}
+
+.spec.skip::before {
+  content: '\25CB';
+}
+
+.spec.fail {
+  color: #c0392b;
+}
+
+.spec.skip {
+  color: #bdc3c7;
+  text-decoration: line-through; 
+}
+
+.error-block {
+  border: 1px solid #c0392b;
+  margin-left: 15px;
+  padding: 10px;
+  border-radius: 5px;
+  max-width: 600px;
+}
