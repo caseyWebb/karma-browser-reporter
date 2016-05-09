@@ -35,6 +35,7 @@ const BrowserReporter = function(baseReporterDecorator, {
   io.on('connection', (socket) => {
     connectedSockets.push(socket)
     messages.forEach((m) => socket.emit('spec', m))
+    socket.emit('run_complete')
     socket.on('disconnect', () => connectedSockets.splice(connectedSockets.indexOf(socket), 1))
   })
 
@@ -69,7 +70,7 @@ const BrowserReporter = function(baseReporterDecorator, {
   }
 
   function queueOrSend(browser, result) {
-    const message =  { browser, result: result }
+    const message =  { browser, result }
 
     messages.push(message)
 

@@ -3,7 +3,9 @@
 ![NPM](https://img.shields.io/npm/v/karma-browser-reporter.svg)
 ![WTFPL](https://img.shields.io/npm/l/karma-browser-reporter.svg)
 
-
+<p align="center">
+  ![BROWSER](demo.png)
+</p>
 
 ### Configuration
 

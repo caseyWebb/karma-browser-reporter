@@ -2318,6 +2318,8 @@
 
 	'use strict';
 
+	function _toConsumableArray(arr) { if (Array.isArray(arr)) { for (var i = 0, arr2 = Array(arr.length); i < arr.length; i++) { arr2[i] = arr[i]; } return arr2; } else { return Array.from(arr); } }
+
 	var _ = __webpack_require__(52);
 	var m = __webpack_require__(2);
 	var socket = __webpack_require__(6)();
@@ -2340,6 +2342,9 @@
 	    },
 	    onRunComplete: function onRunComplete() {
 	      TestReport.viewModel.working(false);
+	      _.each(TestReport.viewModel.browsers, function (b) {
+	        return b.logToConsole();
+	      });
 	      m.redraw();
 	    },
 	    onSpec: function onSpec(_ref) {
@@ -2361,7 +2366,9 @@
 	        class: test.__is_spec__ ? 'last' : null
 	      }, test.__is_spec__ ? m('span.spec', {
 	        class: test.skipped ? 'skip' : test.success ? 'pass' : 'fail'
-	      }, [test.description, !test.skipped && !test.success ? m('pre.error-block', _.map(test.errors, 'message').join('<br/>')) : null]) : [m('h3.describe-header', describe), _.map(test, function (t, d) {
+	      }, [test.description, !test.skipped && !test.success ? m('pre.error-block', [].concat(_toConsumableArray(_.map(test.errors, 'message')), _toConsumableArray(_.map(test.log, function (l) {
+	        return l.trim();
+	      }))).join('\n\n')) : null]) : [m('h3.describe-header', describe), _.map(test, function (t, d) {
 	        return TestReport.viewModel.toDom(t, d);
 	      })]);
 	    },
@@ -25997,6 +26004,7 @@
 	      var time = _ref2.time;
 	      var describes = _ref2.suite;
 	      var errors = _ref2.assertionErrors;
+	      var log = _ref2.log;
 
 	      if (skipped) {
 	        this.skipped(this.skipped() + 1);
@@ -26014,17 +26022,34 @@
 	        skipped: skipped,
 	        time: time,
 	        errors: errors,
+	        log: log,
 	        __is_spec__: true
 	      })));
-
-	      console.dir(this.tests);
+	    }
+	  }, {
+	    key: 'logToConsole',
+	    value: function logToConsole() {
+	      console.dir({ // eslint-disable-line
+	        id: this.id,
+	        name: this.fullName,
+	        passed: this.passed(),
+	        failed: this.failed(),
+	        skipped: this.skipped(),
+	        tests: this.tests
+	      });
 	    }
 	  }, {
 	    key: 'clear',
 	    value: function clear() {
+	      var _this = this;
+
 	      this.passed(0);
 	      this.failed(0);
 	      this.skipped(0);
+
+	      _(this.tests).keys().each(function (k) {
+	        return delete _this.tests[k];
+	      });
 	    }
 	  }]);
 
@@ -26068,7 +26093,7 @@
 
 
 	// module
-	exports.push([module.id, "html {\n  font-family: sans-serif;\n}\n\n.counts {\n  float: right;\n  font-size: 12px;\n}\n\n.count-label {\n  color: #666;\n  padding-right: 5px;\n}\n\n.working-label {\n  color: #666;\n  padding-right: 25px;\n}\n\n.count {\n  text-transform: italic;\n  margin-right: 15px;\n}\n\n.browser-header {\n  margin-left: 15px;\n  color: #666;\n  font-weight: 200;\n}\n\n.describe-block {\n  margin-left: 5px;\n  padding-left: 10px;\n  border-left: 1px solid #eee;\n}\n\n.describe-block.last {\n  border-left: none;\n}\n\n.describe-header {\n  margin-bottom: 5px;\n  color: #333;\n}\n\n.spec {\n  font-size: 12px;\n}\n\n.spec::before {\n  display: inline-block;\n  min-width: 15px;\n}\n\n.spec.pass::before {\n  color: #27ae60;\n  content: '\\2713';\n}\n\n.spec.fail::before {\n  content: '\\2717';\n}\n\n.spec.skip::before {\n  content: '\\25CB';\n}\n\n.spec.fail {\n  color: #c0392b;\n}\n\n.spec.skip {\n  color: #bdc3c7;\n  text-decoration: line-through; \n}\n\n.error-block {\n  border: 1px solid #c0392b;\n  margin-left: 15px;\n  padding: 10px;\n  border-radius: 5px;\n  max-width: 600px;\n}\n", ""]);
+	exports.push([module.id, "html {\n  font-family: sans-serif;\n}\n\n.counts {\n  float: right;\n  font-size: 12px;\n}\n\n.count-label {\n  color: #666;\n  padding-right: 5px;\n}\n\n.working-label {\n  color: #666;\n  padding-right: 25px;\n}\n\n.count {\n  text-transform: italic;\n  margin-right: 15px;\n}\n\n.browser-header {\n  margin-left: 15px;\n  color: #666;\n  font-weight: 200;\n}\n\n.describe-block {\n  margin-left: 5px;\n  padding-left: 10px;\n  border-left: 1px solid #eee;\n}\n\n.describe-block.last {\n  border-left: none;\n}\n\n.describe-header {\n  margin-bottom: 5px;\n  color: #333;\n}\n\n.spec {\n  font-size: 12px;\n}\n\n.spec::before {\n  display: inline-block;\n  min-width: 15px;\n}\n\n.spec.pass::before {\n  color: #27ae60;\n  content: '\\2713';\n}\n\n.spec.fail::before {\n  content: '\\2717';\n}\n\n.spec.skip::before {\n  content: '\\25CB';\n}\n\n.spec.fail {\n  color: #c0392b;\n}\n\n.spec.skip {\n  color: #bdc3c7;\n  text-decoration: line-through;\n}\n\n.error-block {\n  border: 1px solid #c0392b;\n  margin-left: 15px;\n  padding: 10px;\n  border-radius: 5px;\n  max-width: 600px;\n  overflow-x: scroll;\n}\n", ""]);
 
 	// exports
 

@@ -14,18 +14,23 @@ describe('A demo test suite', () => {
   })
 
   describe('with an inner suite', () => {
-    it('1.2.0 should (slowly) pass', (done) => {
-      expect(true).to.be.true
-
-      setTimeout(() => {
-        expect(true).to.be.true
-        done()
-      }, 1000)
+    it('1.2.0 should throw Error', () => {
+      throw new TypeError('oh noes!')
     })
 
     describe('with another inner suite', () => {
-      it('1.3.0 should throw Error', () => {
+      it('1.3.0 should pass', () => {
+        expect(true).to.be.true
+      })
+    })
+
+    describe('with failing hook', () => {
+      before(() => {
         throw new TypeError('oh noes!')
+      })
+
+      it('should never hit this', () => {
+        expect(true).to.be.true
       })
     })
   })

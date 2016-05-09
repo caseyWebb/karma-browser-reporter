@@ -22,6 +22,7 @@ const TestReport = {
 
     onRunComplete() {
       TestReport.viewModel.working(false)
+      _.each(TestReport.viewModel.browsers, (b) => b.logToConsole())
       m.redraw()
     },
 
@@ -52,7 +53,10 @@ const TestReport = {
         }, [
           test.description,
           !test.skipped && !test.success
-           ? m('pre.error-block', _.map(test.errors, 'message').join('<br/>'))
+           ? m('pre.error-block', [
+             ..._.map(test.errors, 'message'),
+             ..._.map(test.log, (l) => l.trim())
+           ].join('\n\n'))
            : null
         ])
         : [

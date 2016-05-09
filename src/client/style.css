@@ -71,7 +71,7 @@ html {
 
 .spec.skip {
   color: #bdc3c7;
-  text-decoration: line-through; 
+  text-decoration: line-through;
 }
 
 .error-block {
@@ -80,4 +80,5 @@ html {
   padding: 10px;
   border-radius: 5px;
   max-width: 600px;
+  overflow-x: scroll;
 }

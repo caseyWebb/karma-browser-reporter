@@ -50,6 +50,7 @@ var BrowserReporter = function BrowserReporter(baseReporterDecorator) {
     messages.forEach(function (m) {
       return socket.emit('spec', m);
     });
+    socket.emit('run_complete');
     socket.on('disconnect', function () {
       return connectedSockets.splice(connectedSockets.indexOf(socket), 1);
     });

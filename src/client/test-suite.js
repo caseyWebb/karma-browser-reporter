@@ -24,7 +24,8 @@ class TestSuite {
     skipped,
     time,
     suite: describes,
-    assertionErrors: errors
+    assertionErrors: errors,
+    log
   }) {
     if (skipped) {
       this.skipped(this.skipped() + 1)
@@ -42,17 +43,31 @@ class TestSuite {
         skipped,
         time,
         errors,
+        log,
         __is_spec__: true
       }
     }))
+  }
 
-    console.dir(this.tests)
+  logToConsole() {
+    console.dir({ // eslint-disable-line
+      id: this.id,
+      name: this.fullName,
+      passed: this.passed(),
+      failed: this.failed(),
+      skipped: this.skipped(),
+      tests: this.tests
+    })
   }
 
   clear() {
     this.passed(0)
     this.failed(0)
     this.skipped(0)
+
+    _(this.tests)
+      .keys()
+      .each((k) => delete this.tests[k])
   }
 }
 
