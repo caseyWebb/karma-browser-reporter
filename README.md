@@ -4,7 +4,7 @@
 ![WTFPL](https://img.shields.io/npm/l/karma-browser-reporter.svg)
 
 <p align="center">
-  <img src="demo.png alt="demo" />
+  <img src="demo.png" alt="demo" />
 </p>
 
 ### Configuration
