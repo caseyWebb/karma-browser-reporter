@@ -1,6 +1,6 @@
 {
   "name": "karma-browser-reporter",
-  "version": "1.0.0",
+  "version": "0.0.0",
   "description": "In-Browser Karma Reporting",
   "main": "dist/reporter.js",
   "dependencies": {
