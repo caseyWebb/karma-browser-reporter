@@ -16,7 +16,7 @@ const TestReport = {
 
     onRunStart() {
       TestReport.viewModel.working(true)
-      _.map(TestReport.viewModel.browsers, (b) => b.clear())
+      _.each(TestReport.viewModel.browsers, (b) => b.clear())
       m.redraw()
     },
 
