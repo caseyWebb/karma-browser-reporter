@@ -38,32 +38,31 @@ const TestReport = {
       m.redraw()
     },
 
-    toDom(test, describe) {
-      return m('div.describe-block', {
-        class: test.__is_spec__ ? 'last' : null
+    toDom(test, describe, lower) {
+      if (test.__is_spec__) return m('p.spec', {
+        class:
+          test.skipped
+            ? 'skip'
+            : test.success
+              ? 'pass'
+              : 'fail'
+      }, [
+        test.description,
+        !test.skipped && !test.success
+         ? m('pre.error-block', [
+           ..._.map(test.errors, 'message'),
+           ..._.map(test.log, (l) => l.trim())
+         ].join('\n\n'))
+         : null
+      ])
+      else return m('div.describe-block', {
+        class: null
       },
-      test.__is_spec__
-        ? m('span.spec', {
-          class:
-            test.skipped
-              ? 'skip'
-              : test.success
-                ? 'pass'
-                : 'fail'
-        }, [
-          test.description,
-          !test.skipped && !test.success
-           ? m('pre.error-block', [
-             ..._.map(test.errors, 'message'),
-             ..._.map(test.log, (l) => l.trim())
-           ].join('\n\n'))
-           : null
-        ])
-        : [
-            m('h3.describe-header', describe),
-            _.map(test, (t, d) =>
-              TestReport.viewModel.toDom(t, d))
-          ]
+        [
+          m(((lower === true ? 'b' : 'h3') + '.describe-header'), describe),
+          _.map(test, (t, d) =>
+          TestReport.viewModel.toDom(t, d, true))
+        ]
       )
     },
 
