@@ -2,6 +2,20 @@ html {
   font-family: sans-serif;
 }
 
+p {
+  margin: 2px;
+}
+
+b {
+  color: #454545;
+  font-size: 11pt;
+}
+
+h3 {
+  font-size: 18pt;
+  color: black;
+}
+
 .counts {
   float: right;
   font-size: 12px;
@@ -40,7 +54,6 @@ html {
 
 .describe-header {
   margin-bottom: 5px;
-  color: #333;
 }
 
 .spec {
