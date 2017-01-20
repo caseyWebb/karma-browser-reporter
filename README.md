@@ -1,5 +1,7 @@
 # karma-browser-reporter
 
+[![Greenkeeper badge](https://badges.greenkeeper.io/caseyWebb/karma-browser-reporter.svg)](https://greenkeeper.io/)
+
 ![NPM](https://img.shields.io/npm/v/karma-browser-reporter.svg)
 ![WTFPL](https://img.shields.io/npm/l/karma-browser-reporter.svg)
 [![Code Climate](https://img.shields.io/codeclimate/github/caseyWebb/karma-browser-reporter.svg?maxAge=2592000)]()
