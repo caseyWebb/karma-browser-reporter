@@ -10,7 +10,8 @@
     "opn": "^4.0.1",
     "portfinder": "^1.0.3",
     "socket.io": "^1.4.6",
-    "socket.io-client": "^1.4.6"
+    "socket.io-client": "^1.4.6",
+    "snyk": "^1.189.0"
   },
   "devDependencies": {
     "babel-core": "^6.8.0",
@@ -34,7 +35,9 @@
   "scripts": {
     "build": "webpack -p && babel src/reporter.js -o dist/reporter.js",
     "watch": "webpack -w & babel src/reporter.js --watch -o dist/reporter.js",
-    "demo": "karma start"
+    "demo": "karma start",
+    "snyk-protect": "snyk protect",
+    "prepublish": "npm run snyk-protect"
   },
   "repository": {
     "type": "git",
@@ -45,5 +48,6 @@
   "bugs": {
     "url": "https://github.com/profiscience/karma-browser-reporter/issues"
   },
-  "homepage": "https://github.com/profiscience/karma-browser-reporter"
+  "homepage": "https://github.com/profiscience/karma-browser-reporter",
+  "snyk": true
 }
